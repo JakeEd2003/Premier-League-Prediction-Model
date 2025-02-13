@@ -32,11 +32,14 @@ model.fit(x_train, y_train)
 
 y_pred = model.predict(x_test)
 #round the predictions to the nearest in as league postion cannot be a decimal
-y_pred = np.round(y_pred).astype(int)
+y_pred = np.ceil(y_pred).astype(int)
 
 #calculate the accuracy of the model
 #Mean Absolute Error
 mae = 0
+print(y_test) #DELETE IN FUTURE
+print(y_pred) #DELETE IN FUTURE
 for i in range(n):
     mae += abs(y_test[i] - y_pred[i])
+mae = mae/n
 print(f"MAE = {mae}")
