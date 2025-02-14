@@ -1,13 +1,14 @@
-import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import GridSearchCV
 
 
 def random_forest_regressor(data, team_data):
     x_train, x_test, y_train, y_test = split_data(data, team_data)
     rfr = RandomForestRegressor(random_state=42)
     rfr.fit(x_train, y_train)
+    
     y_pred = rfr.predict(x_test)
     y_pred = np.ceil(y_pred).astype(int)
     return y_test, y_pred
@@ -29,8 +30,7 @@ def split_data(data, team_data):
     testing_data =  team_data[team_data["season_end_year"] > split_year]
 
     #define features
-    #x_train = training_data[['gd', 'points']]
-    #x_test = testing_data[['gd', 'points']]
+
     x_train = training_data[['position']]
     x_test = testing_data[['position']]
     #define target
