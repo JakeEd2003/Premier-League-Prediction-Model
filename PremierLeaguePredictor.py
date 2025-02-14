@@ -19,6 +19,6 @@ mae = mean_absolute_error(y_pred, y_test)
 mse = mean_squared_error(y_pred, y_test)
 r2 = r2_score(y_pred, y_test)
 
-
+print(y_pred)
 print(mae, mse, r2)
 #ADD MORE ACCURACY MEASURES (MEAN SQUARED ERROR, R2)
