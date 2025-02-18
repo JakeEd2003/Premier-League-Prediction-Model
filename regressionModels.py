@@ -22,20 +22,24 @@ def linearRegression(data, team_data):
     return y_test, y_pred
 
 def split_data(data, team_data):
-
     latest_year = data['season_end_year'].max()
     n = 5
     split_year = latest_year - n
-    training_data = team_data[team_data["season_end_year"] < split_year]
-    testing_data =  team_data[team_data["season_end_year"] > split_year]
-
+    training_data = team_data[team_data["season_end_year"] <= split_year]
+    if (team_data['team'] == 'Luton Town').any(): ##returns True or False and any() checks if any row in the series is True
+        testing_data =  team_data[team_data["season_end_year"] == 2024]
+    elif (team_data['team'] == 'Brentford').any():
+        testing_data = team_data[team_data["season_end_year"] >= 2022]
+    else:
+        testing_data =  team_data[team_data["season_end_year"] > split_year]
+    
     #define features
 
     x_train = training_data[['position']]
     x_test = testing_data[['position']]
     #define target
     y_train = training_data['position']
-    y_test = testing_data['position']
+    y_test = testing_data[['season_end_year', 'position']]
     #convert y_test to a numpy array to later be compared to the predictions
-    y_test = y_test.to_numpy()
+
     return x_train, x_test, y_train, y_test
