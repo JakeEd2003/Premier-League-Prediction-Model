@@ -2,9 +2,6 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import GridSearchCV
-import os
-
-os.rename('regressionModels.py', 'utils.py')
 
 def random_forest_regressor(data, team_data):
     x_train, x_test, y_train, y_test = split_data(data, team_data)
