@@ -11,7 +11,7 @@ def brentfordStats(data, name):
     brentford_df = pd.DataFrame()
     luton_df = pd.DataFrame()
     #Get data for Brighton and Sheffield Utd, as well as for Brentford or Luton depending on who's data you are looking for
-    for i in range(start, lastYear):
+    for i in range(start, lastYear+1):
         #Brighton's data from 2018 - 2020
         if i == 2018 or i == 2019 or i == 2020:
             fileterd_data = data[(data['team'] == 'Brighton') & (data['season_end_year'] == i)]
@@ -25,7 +25,7 @@ def brentfordStats(data, name):
         #brentford
         else:
             #luton needs to include the data of brentford to as they only have 1 year of data
-            if name == 'Luton Town' and i < 2024:
+            if name == 'Luton Town' and i <= 2024:
                 if i < 2024:
                     fileterd_data = data[(data['team'] == 'Brentford') & (data['season_end_year'] == i)]
                     brentford_df = pd.concat([brentford_df, fileterd_data], ignore_index=True)
